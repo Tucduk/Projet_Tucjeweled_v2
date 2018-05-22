@@ -23,16 +23,14 @@ public class ControlBouton implements ActionListener {
                     if(vue.getListeBoutton()[i][j].isSelected() && model.isSelect() == false) {
                         model.setX1(i);
                         model.setY1(j);
-                        model.setCoordtemp(model.getTabColor()[i][j]);
+                        model.setCouleurtemp(model.getTabColor()[i][j]);
                         model.setSelect2(true);
                     }else if (vue.getListeBoutton()[i][j].isSelected() && vue.getListeBoutton()[i][j] != vue.getListeBoutton()[model.getX1()][model.getY1()] && model.isSelect() == true) {
-                        model.setTabColor(model.getTabColor()[i][j], model.getX1(), model.getY1());
-                        model.setTabColor(model.getCoordtemp(),i,j);
+                        model.echanger(i,j);
                         vue.getListeBoutton()[i][j].setSelected(false);
                         vue.getListeBoutton()[model.getX1()][model.getY1()].setSelected(false);
                         vue.actualiser();
                         model.setSelect(false);
-                        model.setSelect1(false);
                         model.setSelect2(false);
 
                     }

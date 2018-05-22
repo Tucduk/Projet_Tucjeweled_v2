@@ -8,12 +8,11 @@ public class Model {
     private int score = 0;
     private int x1;
     private int x2;
-    private int coordtemp = 0;
+    private int couleurtemp = 0;
     private int y1;
     private int y2;
 
     private boolean select = false;
-    private boolean select1 = false;
     private boolean select2 = false;
     public Model(){
     }
@@ -78,6 +77,12 @@ public class Model {
         return false;
     }
 
+    public void echanger( int x2, int y2){
+        couleurtemp = tabColor[x1][y1];
+        tabColor[x1][y1] = tabColor[x2][y2];
+        tabColor[x2][y2] = couleurtemp;
+    }
+
     public int[][] getTabColor() {
         return tabColor;
     }
@@ -116,14 +121,6 @@ public class Model {
 
     public void setSelect(boolean select) {
         this.select = select;
-    }
-
-    public boolean isSelect1() {
-        return select1;
-    }
-
-    public void setSelect1(boolean select1) {
-        this.select1 = select1;
     }
 
     public boolean isSelect2() {
@@ -167,11 +164,11 @@ public class Model {
         this.y2 = y2;
     }
 
-    public int getCoordtemp() {
-        return coordtemp;
+    public int getCouleurtemp() {
+        return couleurtemp;
     }
 
-    public void setCoordtemp(int coordtemp) {
-        this.coordtemp = coordtemp;
+    public void setCouleurtemp(int couleurtemp) {
+        this.couleurtemp = couleurtemp;
     }
 }
