@@ -34,6 +34,7 @@ public class ControlBouton implements ActionListener {
                         model.setSelect(false);
                         model.setSelect2(false);
 
+
                     }
                 }
             }
