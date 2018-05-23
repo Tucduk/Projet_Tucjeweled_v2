@@ -133,7 +133,33 @@ public class Model {
             }
         }
         if (ligneOucolonne%2 == 0){
-
+            for (int i = i1; i < -1; i--) {
+                int temp;
+                /*if (i1!=0) {*/
+                    temp = tabColor[i][j1];
+                    tabColor[i][j1] = tabColor[i - 1][j1];
+                    tabColor[i - 1][j1] = temp;
+                    temp = tabColor[i + 1][j1];
+                    tabColor[i + 1][j1] = tabColor[i][j1];
+                    tabColor[i][j1] = temp;
+                    temp = tabColor[i + 2][j1];
+                    tabColor[i + 2][j1] = tabColor[i + 1][j1];
+                    tabColor[i + 1][j1] = temp;
+                    temp = tabColor[i + 3][j1];
+                    tabColor[i + 3][j1] = tabColor[i + 2][j1];
+                    tabColor[i + 2][j1] = temp;
+                    if (ligneOucolonne == 4) {
+                        temp = tabColor[i + 4][j1];
+                        tabColor[i + 4][j1] = tabColor[i + 3][j1];
+                        tabColor[i + 3][j1] = temp;
+                    }
+                    if (ligneOucolonne == 6) {
+                        temp = tabColor[i + 5][j1];
+                        tabColor[i + 5][j1] = tabColor[i + 4][j1];
+                        tabColor[i + 4][j1] = temp;
+                    }
+                /*}*/
+            }
         }
     }
 
