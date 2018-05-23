@@ -29,7 +29,10 @@ public class ControlBouton implements ActionListener {
                         model.echanger(i,j);
                         vue.getListeBoutton()[i][j].setSelected(false);
                         vue.getListeBoutton()[model.getX1()][model.getY1()].setSelected(false);
-                        vue.actualiser();
+                        while (model.testGrille(model.getTabColor())==false){
+                            model.destroyLorC();
+                            vue.actualiser();
+                        }
                         model.setSelect(false);
                         model.setSelect2(false);
 

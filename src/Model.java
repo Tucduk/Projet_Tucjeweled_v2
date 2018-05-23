@@ -3,14 +3,15 @@ import java.util.Random;
 public class Model {
     private int[][] tabColor = new int[8][8];
     private Random random = new Random();
+    private int ligneOucolonne;
     private int level = 0;
     private int tries = 0;
     private int score = 0;
     private int x1;
-    private int x2;
+    private int i1;
     private int couleurtemp = 0;
     private int y1;
-    private int y2;
+    private int j1;
 
     private boolean select = false;
     private boolean select2 = false;
@@ -27,7 +28,8 @@ public class Model {
     }
 
     public boolean testGrille (int[][] tabColor) {
-        if (testLigne(tabColor) || testColonne(tabColor) || testDiagonale(tabColor))
+        ligneOucolonne = 0;
+        if (testLigne(tabColor) || testColonne(tabColor))
             return false;
         else return true;
     }
@@ -35,7 +37,26 @@ public class Model {
     public boolean testLigne (int[][] tabcolor) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 6; j++) {
+                if (j<4){
+                    if (tabcolor[i][j] == tabcolor[i][j+1] && tabcolor[i][j] == tabcolor[i][j+2] && tabcolor[i][j] == tabcolor[i][j+3] && tabcolor[i][j] == tabcolor[i][j+4]){
+                        i1 = i;
+                        j1 = j;
+                        ligneOucolonne = 5;
+                        return true;
+                    }
+                }
+                if (j<5){
+                    if (tabcolor[i][j] == tabcolor[i][j+1] && tabcolor[i][j] == tabcolor[i][j+2] && tabcolor[i][j] == tabcolor[i][j+3]){
+                        i1 = i;
+                        j1 = j;
+                        ligneOucolonne = 3;
+                        return true;
+                    }
+                }
                 if (tabcolor[i][j] == tabcolor[i][j+1] && tabcolor[i][j] == tabcolor[i][j+2]){
+                    i1 = i;
+                    j1 = j;
+                    ligneOucolonne = 1;
                     return true;
                 }
             }
@@ -46,7 +67,26 @@ public class Model {
     public boolean testColonne (int[][] tabcolor) {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 8; j++) {
+                if (i<4){
+                    if (tabcolor[i][j] == tabcolor[i+1][j] && tabcolor[i][j] == tabcolor[i+2][j] && tabcolor[i][j] == tabcolor[i+3][j] && tabcolor[i][j] == tabcolor[i+4][j]) {
+                        i1 = i;
+                        j1 = j;
+                        ligneOucolonne =6;
+                        return true;
+                    }
+                }
+                if (i<5){
+                    if (tabcolor[i][j] == tabcolor[i+1][j] && tabcolor[i][j] == tabcolor[i+2][j] && tabcolor[i][j] == tabcolor[i+3][j]) {
+                        i1 = i;
+                        j1 = j;
+                        ligneOucolonne =4;
+                        return true;
+                    }
+                }
                 if (tabcolor[i][j] == tabcolor[i+1][j] && tabcolor[i][j] == tabcolor[i+2][j]) {
+                    i1 = i;
+                    j1 = j;
+                    ligneOucolonne =2;
                     return true;
                 }
             }
@@ -54,23 +94,49 @@ public class Model {
         return false;
     }
 
-    public boolean testDiagonale (int[][] tabcolor) {
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (j < 6 && i < 6) {
-                    if (tabcolor[i][j] == tabcolor[i + 1][j + 1] && tabcolor[i][j] == tabcolor[i + 2][j + 2]) {
-                        return true;
-                    }
+    public void destroyLorC(){
+        if (ligneOucolonne%2 != 0){
+            for (int i = i1; i > 0; i--) {
+                int temp;
+                temp = tabColor[i][j1];
+                tabColor[i][j1] = tabColor[i-1][j1];
+                tabColor[i-1][j1] = temp;
+                temp = tabColor[i][j1+1];
+                tabColor[i][j1+1] = tabColor[i-1][j1+1];
+                tabColor[i-1][j1+1] = temp;
+                temp = tabColor[i][j1+2];
+                tabColor[i][j1+2] = tabColor[i-1][j1+2];
+                tabColor[i-1][j1+2] = temp;
+
+                if (ligneOucolonne == 3 || ligneOucolonne == 5){
+                    temp = tabColor[i][j1+3];
+                    tabColor[i][j1+3] = tabColor[i-1][j1+3];
+                    tabColor[i-1][j1+3] = temp;
                 }
-                if (j >2 && i < 6){
-                    if (tabcolor[i][j] == tabcolor[i + 1][j - 1] && tabcolor[i][j] == tabcolor[i + 2][j - 2]){
-                        return true;
-                    }
+                if (ligneOucolonne == 5){
+                    temp = tabColor[i][j1+4];
+                    tabColor[i][j1+4] = tabColor[i-1][j1+4];
+                    tabColor[i-1][j1+4] = temp;
                 }
+
+            }
+            tabColor[0][j1] = 1 + random.nextInt(9 - 1);
+            tabColor[0][j1+1] = 1 + random.nextInt(9 - 1);
+            tabColor[0][j1+2] = 1 + random.nextInt(9 - 1);
+            switch (ligneOucolonne){
+                case 3:
+                    tabColor[0][j1+3] = 1 + random.nextInt(9 - 1);
+
+                case 5:
+                    tabColor[0][j1+4] = 1 + random.nextInt(9 - 1);
+
             }
         }
-        return false;
+        if (ligneOucolonne%2 == 0){
+
+        }
     }
+
 
     public void echanger( int x2, int y2){
         if (siaCote(x1,y1,x2,y2) && !testModifIfEchange(x1,y1,x2,y2)){
