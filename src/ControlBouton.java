@@ -33,8 +33,6 @@ public class ControlBouton implements ActionListener {
                         vue.actualiser();
                         model.setSelect(false);
                         model.setSelect2(false);
-
-
                     }
                 }
             }
