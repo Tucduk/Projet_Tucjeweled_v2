@@ -4,7 +4,7 @@ public class Model {
     private int[][] tabColor = new int[8][8];
     private Random random = new Random();
     private int ligneOucolonne;
-    private int level = 0;
+    private int level = 1;
     private int tries = 0;
     private int score = 0;
     private int x1;
@@ -12,7 +12,6 @@ public class Model {
     private int couleurtemp = 0;
     private int y1;
     private int j1;
-
     private boolean select = false;
     private boolean select2 = false;
     public Model(){
@@ -183,6 +182,15 @@ public class Model {
             tabColor[x2][y2] = couleurtemp;
             while(!testGrille(tabColor)){
                 destroyLorC();
+                if (ligneOucolonne ==1 || ligneOucolonne== 2){
+                    score = score+(level*100);
+                }
+                if (ligneOucolonne ==3 || ligneOucolonne== 4){
+                    score = score+(level*300);
+                }
+                if (ligneOucolonne ==5 || ligneOucolonne== 6){
+                    score = score+(level*1000);
+                }
             }
         }
     }
@@ -215,6 +223,7 @@ public class Model {
                 return true;
             }
         }
+        System.out.println("false");
         return false;
     }
 

@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.net.URL;
-import java.util.Random;
 
 public class Vue extends JFrame {
 
@@ -158,6 +157,10 @@ public class Vue extends JFrame {
                 }
             }
         }
+        level.setText("Level : " + model.getLevel());
+        tries.setText("Tries : " + model.getTries());
+        score.setText("Score : " + model.getScore());
+        System.out.println("Level : " + model.getLevel() + " Tries : " + model.getTries()+ " Score : " + model.getScore());
     }
 
     public JToggleButton[][] getListeBoutton() {

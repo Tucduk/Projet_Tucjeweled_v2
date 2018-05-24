@@ -38,5 +38,6 @@ public class ControlBouton implements ActionListener {
         if (model.isSelect() == false && model.isSelect2() == true){
             model.setSelect(true);
         }
+
     }
 }
