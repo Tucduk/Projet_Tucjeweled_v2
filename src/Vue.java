@@ -27,10 +27,10 @@ public class Vue extends JFrame {
     private Icon icone6;
     private Icon icone7;
     private Icon icone8;
-    private URL urlImage1 = getClass().getResource("images/378303.jpeg");
+    private URL urlImage1 = getClass().getResource("images/tuccrispy.jpeg");
     private URL urlImage2 = getClass().getResource("images/378323.jpeg");
-    private URL urlImage3 = getClass().getResource("images/378343.jpeg");
-    private URL urlImage4 = getClass().getResource("images/378363.jpeg");
+    private URL urlImage3 = getClass().getResource("images/imagetucamericain.jpeg");
+    private URL urlImage4 = getClass().getResource("images/americain2.jpg");
     private URL urlImage5 = getClass().getResource("images/379593.jpeg");
     private URL urlImage6 = getClass().getResource("images/526993.jpeg");
     private URL urlImage7 = getClass().getResource("images/527013.jpeg");
