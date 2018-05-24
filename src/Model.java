@@ -213,7 +213,7 @@ public class Model {
         if (y1==y2){
             if (x1==x2+1){
                 return true;
-            }else if (x1-1==x2){
+            }else if (x1+1==x2){
                 return true;
             }
         }else if (x1==x2){
@@ -223,7 +223,7 @@ public class Model {
                 return true;
             }
         }
-        System.out.println("false");
+        System.out.println("false x1 " + x1 + " y1 " + y1 +" x2 " + x2 + " y2 " + y2);
         return false;
     }
 
