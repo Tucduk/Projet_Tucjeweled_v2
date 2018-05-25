@@ -71,6 +71,8 @@ public class Vue extends JFrame {
         tries = new JLabel("Tries : " + model.getTries());
         score = new JLabel("Score : " + model.getScore());
         progressBar = new JProgressBar(0,100);
+        progressBar.setStringPainted(true);
+
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 listeBoutton[i][j] = new JToggleButton();
@@ -165,5 +167,13 @@ public class Vue extends JFrame {
 
     public JToggleButton[][] getListeBoutton() {
         return listeBoutton;
+    }
+
+    public JProgressBar getProgressBar() {
+        return progressBar;
+    }
+
+    public void setProgressBar(JProgressBar progressBar) {
+        this.progressBar = progressBar;
     }
 }
