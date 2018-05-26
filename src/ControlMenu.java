@@ -36,7 +36,6 @@ public class ControlMenu implements ActionListener {
             v.actualiser();
         }
         if (a.getSource() == v.getQuitter()){
-            System.out.println("jshdjkqslkjdfqkm,lksq,lk");
             System.exit(0);
         }
         if (a.getSource() == v.getBestScores()){
@@ -44,8 +43,9 @@ public class ControlMenu implements ActionListener {
             m.setPlay(false);
             v.getPause().setText("Pause");
             v.actualiser();
-            v.getFinDePartie().showMessageDialog(v.getJFrame(), "Best scores :\n    1- " + m.lecture(1)
-                    + "\n   2- " + m.lecture(2) + "\n    3- " + m.lecture(3), "Best scores", JOptionPane.INFORMATION_MESSAGE);
+            m.lecture();
+            v.getFinDePartie().showMessageDialog(v.getJFrame(), "Best scores :\n    1- " + m.getScore1()
+                    + "\n   2- " + m.getScore2() + "\n    3- " + m.getScore3(), "Best scores", JOptionPane.INFORMATION_MESSAGE);
             m.setPlay(true);
             v.actualiser();
 

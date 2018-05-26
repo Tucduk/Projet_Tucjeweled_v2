@@ -17,34 +17,29 @@ public class ControlBouton implements ActionListener {
                 vue.getProgressBar().setValue((50)%100);
                 vue.actualiser();
             }
-            if (vue.getProgressBar().getValue()<10){
+            if (vue.getProgressBar().getValue()<10 || model.getTries()<=0){
                 timer.stop();
+                if (model.getTries()<=0){
+                    model.setBecauseOfTries(true);
+                }
                 finDePartie();
+                model.gestionScores();
             }
 
         }
     });
 
     public void finDePartie() {
-        vue.getFinDePartie().showMessageDialog(vue.getJFrame(), "La partie est finie. \n Score: " + model.getScore(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        String messageFin = " le temp est ecoule";
+        if (model.isBecauseOfTries()){
+            messageFin = " vous n'avez plus essais";
+        }
+        vue.getFinDePartie().showMessageDialog(vue.getJFrame(), "La partie est finie car " + messageFin + " \n Score: " + model.getScore(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
         model.setPlay(false);
         vue.actualiser();
         model.setPartieFinie(true);
         model.pause();
-
-
-
-
-        /*model.setPartieFinie(true);
-        int reponse = vue.getFinDePartie().showConfirmDialog(vue.getJFrame(), "La partie est finie, votre score est de" + model.getScore() + " \nNouvelle partie ?", "Fin de la partie",
-                JOptionPane.YES_NO_OPTION);
-        if (reponse == 0) {
-            Model model = new Model();
-            ControlGroup control = new ControlGroup(model);
-        }*/
     }
-
-
 
     public ControlBouton(Model model, Vue vue){
         this.model = model;
@@ -53,9 +48,6 @@ public class ControlBouton implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-
-
-
         timer.start();
 
             for (int i = 0; i < 8; i++) {
@@ -84,9 +76,5 @@ public class ControlBouton implements ActionListener {
 
     public Timer getTimer() {
         return timer;
-    }
-
-    public void setTimer(Timer timer) {
-        this.timer = timer;
     }
 }

@@ -13,15 +13,12 @@ public class Vue extends JFrame {
     private JMenuItem nouvellePartie;
     private JMenuItem bestScores;
     private JMenuItem pause;
-    private ControlMenu controlMenu;
-
 
     private JToggleButton[][] listeBoutton;
     private JProgressBar progressBar;
     private JLabel level;
     private JLabel tries;
     private JLabel score;
-    //private Icon[] = new Icon[size];
     private Icon icone1;
     private Icon icone2;
     private Icon icone3;

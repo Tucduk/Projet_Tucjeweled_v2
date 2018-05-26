@@ -6,7 +6,7 @@ public class Model {
     private Random random = new Random();
     private int ligneOucolonne;
     private int level = 1;
-    private int tries = 0;
+    private int tries = 15;
     private int score = 0;
     private int valeurAjouterProgressBarre = 0;
     private int x1;
@@ -18,33 +18,67 @@ public class Model {
     private boolean select2 = false;
     private boolean partieFinie = false;
     private boolean play = true;
-    private String ligne;
-    private String score1 = lecture(1);
-    private String score2 = lecture(2);
-    private String score3 = lecture(3);
+    private int ligne;
+    private int score1;
+    private int score2;
+    private int score3;
+    private boolean becauseOfTries;
+
     public Model(){
     }
 
-    /*public void ecriture(int numLigne){
+    public void ecriture(){
         try{
-            FileWriter fl = new FileWriter("src/meilleursScores.txt");
-            BufferedWriter fichier = new BufferedWriter(fl);
-            fichier.write(score1);
-            fichier.write(score2);
-            fichier.write(score3);
+            BufferedWriter fichier = new BufferedWriter(new FileWriter("src/meilleursScores.txt"));
+            if (score1 != 0){
+                fichier.write(String.valueOf(score1));
+                fichier.newLine();
+            }
+            if (score1 != 0){
+                fichier.write(String.valueOf(score2));
+                fichier.newLine();
+            }
+            if (score1 != 0){
+                fichier.write(String.valueOf(score3));
+                fichier.newLine();
+            }
+            fichier.close();
         }catch (Exception e){
             e.printStackTrace();
         }
-    }*/
+    }
 
-    public String lecture(int numligne){
+    public void gestionScores(){
+        lecture();
+        if (score > score1){
+            int temp = score1;
+            score1 = score;
+            score = score2;
+            score2 = temp;
+            score3 = score;
+        }
+        if (score<score1 && score> score2 && score>score3){
+            int temp = score2;
+            score2 = score;
+            score3 = temp;
+        }
+        if (score<score1 && score<score2 && score>score3){
+            score3 = score;
+        }
+        ecriture();
+    }
+
+    public int lecture(){
         try {
             BufferedReader fichier = new BufferedReader(new FileReader("src/meilleursScores.txt"));
-            for (int i = 0; i < numligne; i++) {
-                ligne = fichier.readLine();
-            }
 
-
+            System.out.println("pour le moment ça va");
+            score1 = Integer.parseInt(fichier.readLine());
+            System.out.println(score1);
+            score2 = Integer.parseInt(fichier.readLine());
+            System.out.println(score2);
+            score3 = Integer.parseInt(fichier.readLine());
+            System.out.println(score3);
             fichier.close();
         }catch (Exception e){
             e.printStackTrace();
@@ -161,10 +195,12 @@ public class Model {
             switch (ligneOucolonne){
                 case 3:
                     tabColor[0][j1+3] = 1 + random.nextInt(9 - 1);
+                    break;
 
                 case 5:
                     tabColor[0][j1+3] = 1 + random.nextInt(9 - 1);
                     tabColor[0][j1+4] = 1 + random.nextInt(9 - 1);
+                    break;
             }
         }
         if (ligneOucolonne%2 == 0){
@@ -201,9 +237,11 @@ public class Model {
             switch (ligneOucolonne){
                 case 4:
                     tabColor[3][j1] = 1 + random.nextInt(9 - 1);
+                    break;
 
                 case 6:
                     tabColor[4][j1] = 1 + random.nextInt(9 - 1);
+                    break;
 
             }
         }
@@ -229,6 +267,13 @@ public class Model {
                     score = score+(level*1000);
                     valeurAjouterProgressBarre = 5;
                 }
+            }
+        }
+        if (testModifIfEchange(x1,y1,x2,y2) == false){
+            tries = tries - 1;
+            if (tries <=0){
+                setPartieFinie(true);
+                becauseOfTries = true;
             }
         }
     }
@@ -366,11 +411,43 @@ public class Model {
         this.play = play;
     }
 
-    public String getLigne() {
+    public int getLigne() {
         return ligne;
     }
 
-    public void setLigne(String ligne) {
+    public void setLigne(int ligne) {
         this.ligne = ligne;
+    }
+
+    public int getScore1() {
+        return score1;
+    }
+
+    public void setScore1(int score1) {
+        this.score1 = score1;
+    }
+
+    public int getScore2() {
+        return score2;
+    }
+
+    public void setScore2(int score2) {
+        this.score2 = score2;
+    }
+
+    public int getScore3() {
+        return score3;
+    }
+
+    public void setScore3(int score3) {
+        this.score3 = score3;
+    }
+
+    public boolean isBecauseOfTries() {
+        return becauseOfTries;
+    }
+
+    public void setBecauseOfTries(boolean becauseOfTries) {
+        this.becauseOfTries = becauseOfTries;
     }
 }
