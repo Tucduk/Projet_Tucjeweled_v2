@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Random;
 
 public class Model {
@@ -7,6 +8,7 @@ public class Model {
     private int level = 1;
     private int tries = 0;
     private int score = 0;
+    private int valeurAjouterProgressBarre = 0;
     private int x1;
     private int i1;
     private int couleurtemp = 0;
@@ -14,7 +16,40 @@ public class Model {
     private int j1;
     private boolean select = false;
     private boolean select2 = false;
+    private boolean partieFinie = false;
+    private boolean play = true;
+    private String ligne;
+    private String score1 = lecture(1);
+    private String score2 = lecture(2);
+    private String score3 = lecture(3);
     public Model(){
+    }
+
+    /*public void ecriture(int numLigne){
+        try{
+            FileWriter fl = new FileWriter("src/meilleursScores.txt");
+            BufferedWriter fichier = new BufferedWriter(fl);
+            fichier.write(score1);
+            fichier.write(score2);
+            fichier.write(score3);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }*/
+
+    public String lecture(int numligne){
+        try {
+            BufferedReader fichier = new BufferedReader(new FileReader("src/meilleursScores.txt"));
+            for (int i = 0; i < numligne; i++) {
+                ligne = fichier.readLine();
+            }
+
+
+            fichier.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return ligne;
     }
 
     public void remplirTabColor(){
@@ -184,12 +219,15 @@ public class Model {
                 destroyLorC();
                 if (ligneOucolonne ==1 || ligneOucolonne== 2){
                     score = score+(level*100);
+                    valeurAjouterProgressBarre = 3;
                 }
                 if (ligneOucolonne ==3 || ligneOucolonne== 4){
                     score = score+(level*300);
+                    valeurAjouterProgressBarre = 4;
                 }
                 if (ligneOucolonne ==5 || ligneOucolonne== 6){
                     score = score+(level*1000);
+                    valeurAjouterProgressBarre = 5;
                 }
             }
         }
@@ -225,6 +263,10 @@ public class Model {
         }
         System.out.println("false x1 " + x1 + " y1 " + y1 +" x2 " + x2 + " y2 " + y2);
         return false;
+    }
+
+    public void pause(){
+
     }
 
     public int[][] getTabColor() {
@@ -298,5 +340,37 @@ public class Model {
 
     public void setCouleurtemp(int couleurtemp) {
         this.couleurtemp = couleurtemp;
+    }
+
+    public int getValeurAjouterProgressBarre() {
+        return valeurAjouterProgressBarre;
+    }
+
+    public void setValeurAjouterProgressBarre(int valeurAjouterProgressBarre) {
+        this.valeurAjouterProgressBarre = valeurAjouterProgressBarre;
+    }
+
+    public boolean isPartieFinie() {
+        return partieFinie;
+    }
+
+    public void setPartieFinie(boolean partieFinie) {
+        this.partieFinie = partieFinie;
+    }
+
+    public boolean isPlay() {
+        return play;
+    }
+
+    public void setPlay(boolean play) {
+        this.play = play;
+    }
+
+    public String getLigne() {
+        return ligne;
+    }
+
+    public void setLigne(String ligne) {
+        this.ligne = ligne;
     }
 }

@@ -7,19 +7,42 @@ public class ControlBouton implements ActionListener {
 
     private Model model;
     private Vue vue;
-    private Timer timer=new javax.swing.Timer(10000,new ActionListener() {
+    private Timer timer=new javax.swing.Timer(3000,new ActionListener() {
         public void actionPerformed(ActionEvent a) {
             if (vue.getProgressBar().getValue() < 100){
-                vue.getProgressBar().setValue((vue.getProgressBar().getValue()+10)%100);
+                vue.getProgressBar().setValue((vue.getProgressBar().getValue()-10)%100);
                 vue.actualiser();
             }else {
                 model.setLevel(model.getLevel()+1);
-                vue.getProgressBar().setValue((0)%100);
+                vue.getProgressBar().setValue((50)%100);
                 vue.actualiser();
+            }
+            if (vue.getProgressBar().getValue()<10){
+                timer.stop();
+                finDePartie();
             }
 
         }
     });
+
+    public void finDePartie() {
+        vue.getFinDePartie().showMessageDialog(vue.getJFrame(), "La partie est finie. \n Score: " + model.getScore(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        model.setPlay(false);
+        vue.actualiser();
+        model.setPartieFinie(true);
+        model.pause();
+
+
+
+
+        /*model.setPartieFinie(true);
+        int reponse = vue.getFinDePartie().showConfirmDialog(vue.getJFrame(), "La partie est finie, votre score est de" + model.getScore() + " \nNouvelle partie ?", "Fin de la partie",
+                JOptionPane.YES_NO_OPTION);
+        if (reponse == 0) {
+            Model model = new Model();
+            ControlGroup control = new ControlGroup(model);
+        }*/
+    }
 
 
 
@@ -57,5 +80,13 @@ public class ControlBouton implements ActionListener {
             model.setSelect(true);
         }
 
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
     }
 }
