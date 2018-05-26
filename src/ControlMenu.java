@@ -47,6 +47,9 @@ public class ControlMenu implements ActionListener {
             v.getFinDePartie().showMessageDialog(v.getJFrame(), "Best scores :\n    1- " + m.getScore1()
                     + "\n   2- " + m.getScore2() + "\n    3- " + m.getScore3(), "Best scores", JOptionPane.INFORMATION_MESSAGE);
             m.setPlay(true);
+            if (m.isPartieFinie() == false){
+                cb.getTimer().start();
+            }
             v.actualiser();
 
         }

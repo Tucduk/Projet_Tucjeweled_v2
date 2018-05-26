@@ -7,17 +7,18 @@ public class ControlBouton implements ActionListener {
 
     private Model model;
     private Vue vue;
-    private Timer timer=new javax.swing.Timer(3000,new ActionListener() {
+    private Timer timer=new javax.swing.Timer(1000,new ActionListener() {
         public void actionPerformed(ActionEvent a) {
             if (vue.getProgressBar().getValue() < 100){
-                vue.getProgressBar().setValue((vue.getProgressBar().getValue()-10)%100);
+                vue.getProgressBar().setValue((vue.getProgressBar().getValue()-1)%100);
                 vue.actualiser();
             }else {
                 model.setLevel(model.getLevel()+1);
                 vue.getProgressBar().setValue((50)%100);
                 vue.actualiser();
             }
-            if (vue.getProgressBar().getValue()<10 || model.getTries()<=0){
+            if (vue.getProgressBar().getValue()<=0 || model.getTries()<=0){
+                vue.actualiser();
                 timer.stop();
                 if (model.getTries()<=0){
                     model.setBecauseOfTries(true);

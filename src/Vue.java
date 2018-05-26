@@ -185,12 +185,12 @@ public class Vue extends JFrame {
                     }
                 }
             }
+            changeValueProgressBar();
+            level.setText("Level : " + model.getLevel());
+            tries.setText("Tries : " + model.getTries());
+            score.setText("Score : " + model.getScore());
+            System.out.println("Level : " + model.getLevel() + " Tries : " + model.getTries()+ " Score : " + model.getScore());
         }
-        changeValueProgressBar();
-        level.setText("Level : " + model.getLevel());
-        tries.setText("Tries : " + model.getTries());
-        score.setText("Score : " + model.getScore());
-        System.out.println("Level : " + model.getLevel() + " Tries : " + model.getTries()+ " Score : " + model.getScore());
     }
 
     public JToggleButton[][] getListeBoutton() {

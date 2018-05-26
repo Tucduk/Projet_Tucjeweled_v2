@@ -268,12 +268,12 @@ public class Model {
                     valeurAjouterProgressBarre = 5;
                 }
             }
-        }
-        if (testModifIfEchange(x1,y1,x2,y2) == false){
+        }else if (testModifIfEchange(x1,y1,x2,y2) == false || siaCote(x1,y1,x2,y2)==false){
             tries = tries - 1;
             if (tries <=0){
                 setPartieFinie(true);
                 becauseOfTries = true;
+
             }
         }
     }
