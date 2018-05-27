@@ -114,13 +114,9 @@ public class Model {
         try {
             BufferedReader fichier = new BufferedReader(new FileReader("src/meilleursScores.txt"));
 
-            System.out.println("pour le moment ça va");
             score1 = Integer.parseInt(fichier.readLine());
-            System.out.println(score1);
             score2 = Integer.parseInt(fichier.readLine());
-            System.out.println(score2);
             score3 = Integer.parseInt(fichier.readLine());
-            System.out.println(score3);
             fichier.close();
         }catch (Exception e){
             e.printStackTrace();
