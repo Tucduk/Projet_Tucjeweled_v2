@@ -10,7 +10,7 @@ public class ControlBouton implements ActionListener {
     private Timer timer=new javax.swing.Timer(1000,new ActionListener() {
         public void actionPerformed(ActionEvent a) {
             if (vue.getProgressBar().getValue() < 100){
-                vue.getProgressBar().setValue((vue.getProgressBar().getValue()-1)%100);
+                vue.getProgressBar().setValue((vue.getProgressBar().getValue()- model.getLevel())%100);
                 vue.actualiser();
             }else {
                 model.setLevel(model.getLevel()+1);
@@ -35,7 +35,8 @@ public class ControlBouton implements ActionListener {
         if (model.isBecauseOfTries()){
             messageFin = " vous n'avez plus essais";
         }
-        vue.getFinDePartie().showMessageDialog(vue.getJFrame(), "La partie est finie car " + messageFin + " \n Score: " + model.getScore(), "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        vue.getFinDePartie().showMessageDialog(vue.getJFrame(), "La partie est finie car " + messageFin +
+                " \n Score: " + model.getScore() + "\n Et rappellez vous que seul les Tuc Original sont comestible", "Game Over", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("images/tucOriginal.jpg")));
         model.setPlay(false);
         vue.actualiser();
         model.setPartieFinie(true);

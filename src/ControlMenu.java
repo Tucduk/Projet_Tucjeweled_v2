@@ -1,8 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static com.sun.deploy.uitoolkit.ToolkitStore.dispose;
 
 public class ControlMenu implements ActionListener {
     Model m;
@@ -52,6 +51,16 @@ public class ControlMenu implements ActionListener {
             }
             v.actualiser();
 
+        }
+        if (a.getSource() == v.getHint() && m.isPlay() == true){
+            m.Hint();
+            v.getListeBoutton()[m.getCoordi()][m.getCoordj()].setBackground(Color.green);
+            if (m.isHintligne() == true){
+                v.getListeBoutton()[m.getCoordi()+1][m.getCoordj()].setBackground(Color.green);
+            }
+            if (m.isHintligne() == false){
+                v.getListeBoutton()[m.getCoordi()][m.getCoordj()+1].setBackground(Color.green);
+            }
         }
     }
 }

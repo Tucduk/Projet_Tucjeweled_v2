@@ -13,6 +13,7 @@ public class Vue extends JFrame {
     private JMenuItem nouvellePartie;
     private JMenuItem bestScores;
     private JMenuItem pause;
+    private JMenuItem hint;
 
     private JToggleButton[][] listeBoutton;
     private JProgressBar progressBar;
@@ -76,6 +77,7 @@ public class Vue extends JFrame {
         quitter.addActionListener(actionListener);
         nouvellePartie.addActionListener(actionListener);
         pause.addActionListener(actionListener);
+        hint.addActionListener(actionListener);
     }
 
     public void initAttribut(){
@@ -121,6 +123,7 @@ public class Vue extends JFrame {
         nouvellePartie = new JMenuItem("Nouvelle Partie");
         bestScores = new JMenuItem("Meilleurs Scores");
         pause = new JMenuItem("Pause");
+        hint = new JMenuItem("Hint");
 
         infos.add(Box.createHorizontalGlue());
         infos.add(level);
@@ -140,6 +143,7 @@ public class Vue extends JFrame {
         barreMenu.add(options);
         barreMenu.add(quitter);
         barreMenu.add(pause);
+        barreMenu.add(hint);
         board.add(infos);
         board.add(gamezone);
         board.add(test1);
@@ -181,7 +185,10 @@ public class Vue extends JFrame {
                             break;
                     }
                     if (!model.isPlay()){
-                        listeBoutton[i][j].setIcon(icone9);
+                        listeBoutton[i][j].setEnabled(false);
+                    }
+                    if (model.isPlay()) {
+                        listeBoutton[i][j].setEnabled(true);
                     }
                 }
             }
@@ -206,16 +213,8 @@ public class Vue extends JFrame {
         model.setValeurAjouterProgressBarre(0);
     }
 
-    public void setProgressBar(JProgressBar progressBar) {
-        this.progressBar = progressBar;
-    }
-
     public JOptionPane getFinDePartie() {
         return finDePartie;
-    }
-
-    public void setFinDePartie(JOptionPane finDePartie) {
-        this.finDePartie = finDePartie;
     }
 
     public JFrame getJFrame(){
@@ -226,31 +225,20 @@ public class Vue extends JFrame {
         return quitter;
     }
 
-    public void setQuitter(JMenu quitter) {
-        this.quitter = quitter;
-    }
-
     public JMenuItem getNouvellePartie() {
         return nouvellePartie;
-    }
-
-    public void setNouvellePartie(JMenuItem nouvellePartie) {
-        this.nouvellePartie = nouvellePartie;
     }
 
     public JMenuItem getBestScores() {
         return bestScores;
     }
 
-    public void setBestScores(JMenuItem bestScores) {
-        this.bestScores = bestScores;
-    }
-
     public JMenuItem getPause() {
         return pause;
     }
 
-    public void setPause(JMenuItem pause) {
-        this.pause = pause;
+    public JMenuItem getHint() {
+        return hint;
     }
+
 }

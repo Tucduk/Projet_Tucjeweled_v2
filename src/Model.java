@@ -23,8 +23,50 @@ public class Model {
     private int score2;
     private int score3;
     private boolean becauseOfTries;
+    private boolean hintligne = false;
+    private int coordi,coordj;
 
     public Model(){
+    }
+
+    public void Hint(){
+        int[][] tabTemp = new int[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                tabTemp[i][j] = tabColor[i][j];
+            }
+        }
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                int temp = tabTemp[i][j];
+                tabTemp[i][j] = tabTemp[i+1][j];
+                tabTemp[i+1][j] = temp;
+                if (!testGrille(tabTemp) == true){
+                    coordi = i;
+                    coordj = j;
+                    hintligne = true;
+                    System.out.println(coordi + "     " + coordj + "ligne");
+                    temp = tabTemp[i][j];
+                    tabTemp[i][j] = tabTemp[i+1][j];
+                    tabTemp[i+1][j] = temp;
+                    break;
+                }
+                temp = tabTemp[i][j];
+                tabTemp[i][j] = tabTemp[i][j+1];
+                tabTemp[i][j+1] = temp;
+                if (!testGrille(tabTemp) == true){
+                    coordi = i;
+                    coordj = j;
+                    hintligne = false;
+                    System.out.println(coordi + "     " + coordj + "colonne");
+                    temp = tabTemp[i][j];
+                    tabTemp[i][j] = tabTemp[i][j+1];
+                    tabTemp[i][j+1] = temp;
+                    break;
+                }
+
+            }
+        }
     }
 
     public void ecriture(){
@@ -224,12 +266,7 @@ public class Model {
                     temp = tabColor[i + 4][j1];
                         tabColor[i + 4][j1] = tabColor[i + 3][j1];
                         tabColor[i + 3][j1] = temp;
-                    }
-                    if (ligneOucolonne == 8) {
-                        temp = tabColor[i + 5][j1];
-                        tabColor[i + 5][j1] = tabColor[i + 4][j1];
-                        tabColor[i + 4][j1] = temp;
-                    }
+                }
             }
             tabColor[0][j1] = 1 + random.nextInt(9 - 1);
             tabColor[1][j1] = 1 + random.nextInt(9 - 1);
@@ -318,10 +355,6 @@ public class Model {
         return tabColor;
     }
 
-    public void setTabColor(int nb, int i, int j) {
-        tabColor[i][j] = nb;
-    }
-
     public int getLevel() {
         return level;
     }
@@ -334,16 +367,8 @@ public class Model {
         return tries;
     }
 
-    public void setTries(int tries) {
-        this.tries = tries;
-    }
-
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public boolean isSelect() {
@@ -379,10 +404,6 @@ public class Model {
         this.y1 = y1;
     }
 
-    public int getCouleurtemp() {
-        return couleurtemp;
-    }
-
     public void setCouleurtemp(int couleurtemp) {
         this.couleurtemp = couleurtemp;
     }
@@ -411,36 +432,16 @@ public class Model {
         this.play = play;
     }
 
-    public int getLigne() {
-        return ligne;
-    }
-
-    public void setLigne(int ligne) {
-        this.ligne = ligne;
-    }
-
     public int getScore1() {
         return score1;
-    }
-
-    public void setScore1(int score1) {
-        this.score1 = score1;
     }
 
     public int getScore2() {
         return score2;
     }
 
-    public void setScore2(int score2) {
-        this.score2 = score2;
-    }
-
     public int getScore3() {
         return score3;
-    }
-
-    public void setScore3(int score3) {
-        this.score3 = score3;
     }
 
     public boolean isBecauseOfTries() {
@@ -449,5 +450,17 @@ public class Model {
 
     public void setBecauseOfTries(boolean becauseOfTries) {
         this.becauseOfTries = becauseOfTries;
+    }
+
+    public int getCoordi() {
+        return coordi;
+    }
+
+    public int getCoordj() {
+        return coordj;
+    }
+
+    public boolean isHintligne() {
+        return hintligne;
     }
 }
