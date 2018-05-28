@@ -54,13 +54,21 @@ public class ControlMenu implements ActionListener {
         }
         if (a.getSource() == v.getHint() && m.isPlay() == true){
             m.Hint();
-            v.getListeBoutton()[m.getCoordi()][m.getCoordj()].setBackground(Color.green);
-            if (m.isHintligne() == true){
+            if (m.isHintligne() == 0){
+                v.actualiser();
+                cb.getTimer().stop();
+                cb.finDePartie();
+                m.gestionScores();
+            }
+            if (m.isHintligne() == 1){
+                v.getListeBoutton()[m.getCoordi()][m.getCoordj()].setBackground(Color.green);
                 v.getListeBoutton()[m.getCoordi()+1][m.getCoordj()].setBackground(Color.green);
             }
-            if (m.isHintligne() == false){
+            if (m.isHintligne() == 2){
+                v.getListeBoutton()[m.getCoordi()][m.getCoordj()].setBackground(Color.green);
                 v.getListeBoutton()[m.getCoordi()][m.getCoordj()+1].setBackground(Color.green);
             }
+            m.setHintligne(0);
         }
     }
 }

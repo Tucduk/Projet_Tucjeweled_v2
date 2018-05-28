@@ -1,3 +1,5 @@
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
 import java.io.*;
 import java.util.Random;
 
@@ -23,11 +25,13 @@ public class Model {
     private int score2;
     private int score3;
     private boolean becauseOfTries;
-    private boolean hintligne = false;
+    private int hintligne = 0;
     private int coordi,coordj;
+    private boolean meilleur = false;
 
     public Model(){
     }
+
 
     public void Hint(){
         int[][] tabTemp = new int[8][8];
@@ -41,29 +45,36 @@ public class Model {
                 int temp = tabTemp[i][j];
                 tabTemp[i][j] = tabTemp[i+1][j];
                 tabTemp[i+1][j] = temp;
-                if (!testGrille(tabTemp) == true){
+                if (!testGrille(tabTemp)){
                     coordi = i;
                     coordj = j;
-                    hintligne = true;
-                    System.out.println(coordi + "     " + coordj + "ligne");
+                    hintligne = 1;
                     temp = tabTemp[i][j];
                     tabTemp[i][j] = tabTemp[i+1][j];
                     tabTemp[i+1][j] = temp;
                     break;
                 }
                 temp = tabTemp[i][j];
+                tabTemp[i][j] = tabTemp[i+1][j];
+                tabTemp[i+1][j] = temp;
+                temp = tabTemp[i][j];
                 tabTemp[i][j] = tabTemp[i][j+1];
                 tabTemp[i][j+1] = temp;
                 if (!testGrille(tabTemp) == true){
                     coordi = i;
                     coordj = j;
-                    hintligne = false;
-                    System.out.println(coordi + "     " + coordj + "colonne");
+                    hintligne = 2;
                     temp = tabTemp[i][j];
                     tabTemp[i][j] = tabTemp[i][j+1];
                     tabTemp[i][j+1] = temp;
                     break;
                 }
+                /*if (testGrille(tabTemp)){
+                    hintligne = 0;
+                }*/
+                temp = tabTemp[i][j];
+                tabTemp[i][j] = tabTemp[i][j+1];
+                tabTemp[i][j+1] = temp;
 
             }
         }
@@ -98,6 +109,7 @@ public class Model {
             score = score2;
             score2 = temp;
             score3 = score;
+            meilleur = true;
         }
         if (score<score1 && score> score2 && score>score3){
             int temp = score2;
@@ -456,7 +468,23 @@ public class Model {
         return coordj;
     }
 
-    public boolean isHintligne() {
+    public int isHintligne() {
         return hintligne;
+    }
+
+    public void setHintligne(int hintligne) {
+        this.hintligne = hintligne;
+    }
+
+    public void setTries(int tries) {
+        this.tries = tries;
+    }
+
+    public boolean isMeilleur() {
+        return meilleur;
+    }
+
+    public void setMeilleur(boolean meilleur) {
+        this.meilleur = meilleur;
     }
 }

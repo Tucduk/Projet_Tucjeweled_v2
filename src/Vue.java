@@ -186,6 +186,7 @@ public class Vue extends JFrame {
                     }
                     if (!model.isPlay()){
                         listeBoutton[i][j].setEnabled(false);
+                        listeBoutton[i][j].setIcon(icone9);
                     }
                     if (model.isPlay()) {
                         listeBoutton[i][j].setEnabled(true);
@@ -196,6 +197,7 @@ public class Vue extends JFrame {
             level.setText("Level : " + model.getLevel());
             tries.setText("Tries : " + model.getTries());
             score.setText("Score : " + model.getScore());
+            model.Hint();
         }
     }
 
